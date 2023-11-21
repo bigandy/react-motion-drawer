@@ -28,6 +28,13 @@
 
 .drawer {
   position: relative;
+  height: 300px;
+  background: green;
+  padding: 1rem;
+}
+
+.inner {
+  border: 1px solid;
 }
 
 .close {

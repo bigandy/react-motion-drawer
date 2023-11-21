@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
   const [selected, setSelected] = useState<number | null>(null);
@@ -32,9 +32,7 @@ function App() {
       </div>
 
       {/* If there is something selected, we show the drawer */}
-      {selected !== null && (
-        <Drawer selected={selected} handleClose={handleClose} />
-      )}
+      <Drawer selected={selected} handleClose={handleClose} />
     </>
   );
 }
@@ -45,19 +43,30 @@ const Drawer = ({
   selected,
   handleClose,
 }: {
-  selected: number;
+  selected: number | null;
   handleClose: () => void;
 }) => {
   return (
     <motion.div
-      animate={{ y: 100 }}
+      // key={selected}
+      animate={{
+        y: selected !== null ? 100 : 0,
+        opacity: selected !== null ? 1 : 0,
+      }}
       transition={{ type: "spring", stiffness: 100 }}
-      initial="hidden"
-      // animate="show"
+      exit={{ y: -100, opacity: 0 }}
+      initial={{ y: -100, opacity: 0 }}
       className="drawer"
-      key="selected"
     >
-      Drawer - {selected + 1}{" "}
+      <motion.div
+        key={selected}
+        initial={{ x: 300, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: -300, opacity: 0 }}
+        className="inner"
+      >
+        {selected !== null && `Drawer - ${selected + 1}`}{" "}
+      </motion.div>
       <span className="close" onClick={handleClose}>
         x
       </span>
