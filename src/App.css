@@ -1,0 +1,39 @@
+#root {
+  padding: 2rem;
+}
+
+.boxes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  gap: 2rem;
+  margin-block-end: 3rem;
+}
+
+.box {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 0.25rem;
+
+  &:hover {
+    border-color: #646cff;
+    background-color: #ccc;
+  }
+}
+
+.selected {
+  background-color: #ccc;
+  color: white;
+}
+
+.drawer {
+  position: relative;
+}
+
+.close {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
